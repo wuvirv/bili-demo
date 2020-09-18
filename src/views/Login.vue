@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="loginRoot">
     <bl-text text="登录bilibili" />
     <van-form @submit="onSubmit">
       <van-field
@@ -47,11 +47,17 @@ export default {
     }
   },
   methods: {
+    // 登录事件
     async onSubmit () {
+      // 发送登录请求
       const { data: res } = await this.$http.post('login', this.loginForm)
       console.log(res)
       if (res.code !== 200) return this.$notify({ type: 'danger', message: '用户名或密码错误' })
       this.$notify({ type: 'success', message: '登录成功' })
+      // 将token和id存储本地
+      localStorage.setItem('id', res.id)
+      localStorage.setItem('token', res.token)
+      this.$store.dispatch('getInfo')
       this.$router.push('/')
     }
   }
@@ -59,6 +65,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.loginRoot {
+  height: 100%;
+  background-color: #f4f4f4;
+}
 .margin-top {
   margin-top: 4.167vw;
 }

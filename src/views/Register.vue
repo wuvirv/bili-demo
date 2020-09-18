@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="registerRoot">
     <bl-text text="注册bilibili" />
     <van-form @submit="onSubmit" ref="registerRef">
       <van-field
@@ -62,6 +62,8 @@ export default {
       if (res.code === 302) return this.$notify({ type: 'danger', message: res.msg })
       if (res.code !== 200) return this.$notify({ type: 'danger', message: '注册失败' })
       this.$notify({ type: 'success', message: '注册成功' })
+      localStorage.setItem('id', res.id)
+      localStorage.setItem('token', res.objtoken)
       this.$router.push('/login')
     }
   }
@@ -69,6 +71,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.registerRoot {
+  height: 100%;
+  background-color: #f4f4f4;
+}
 .margin-top {
   margin: 4.167vw 0;
 }

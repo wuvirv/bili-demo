@@ -4,5 +4,9 @@ html, * {
 }
 html, body, #app {
   height: 100%;
-  background-color: #f4f4f4;
+  background-color: #fff;
+}
+[v-cloak]{
+  /* 元素隐藏 */
+  display: none;
 }
