@@ -3,7 +3,8 @@
     <div class="banner"></div>
     <div class="part1">
       <div class="face">
-        <img :src="info.user_img">
+        <img v-if="info.user_img != null" :src="info.user_img">
+        <img v-else src="http://i1.hdslb.com/bfs/face/7e257b201f18852adfdf6ed0876143e082dba048.jpg" alt="">
       </div>
       <div class="relation">
         <div class="count">
@@ -47,9 +48,7 @@
 
 <script>
 export default {
-  props: {
-    info: Object
-  },
+  props: ['info'],
   data () {
     return {
       tags: false

@@ -4,13 +4,16 @@ import Register from '../views/Register'
 import Login from '../views/Login'
 import userInfo from '../views/userInfo'
 import Home from '../views/Home'
-
+import Article from '../views/Article'
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
     name: 'home',
+    meta: {
+      keepAlive: true
+    },
     component: Home
   },
   {
@@ -27,6 +30,11 @@ const routes = [
     path: '/userinfo',
     name: 'userinfo',
     component: userInfo
+  },
+  {
+    path: '/article/:id',
+    name: 'article',
+    component: Article
   }
 ]
 

@@ -8,7 +8,10 @@ import blCompont from './components/bl-components'
 import http from './http'
 import '../src/assets/css/font.css'
 import store from './store'
+import video from 'video.js'
+import 'video.js/dist/video-js.css'
 
+Vue.prototype.$video = video
 Vue.prototype.$http = http
 Vue.use(blCompont)
 Vue.use(Vant)

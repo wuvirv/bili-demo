@@ -1,8 +1,8 @@
 <template>
   <div>
     <bl-navbar></bl-navbar>
-    <van-tabs v-model="active" @click="selectActive" swipeable color="#fb7299" title-active-color="#fb7299" title-inactive-color="#505050" line-height="0.556vw" line-width="6.944vw">
-      <van-tab :key="item._id" v-for="item in category" :title="item.title" :title-style="{fontSize: '3.75vw', padding: '0 15px'}">
+    <van-tabs sticky v-model="active" @click="selectActive" swipeable color="#fb7299" title-active-color="#fb7299" title-inactive-color="#505050" line-width="6.944vw">
+      <van-tab :key="index" v-for="(item, index) in category" :title="item.title" :title-style="{fontSize: '3.75vw', padding: '0 15px'}">
         <div class="videoList-box">
           <van-list
             v-model="item.loading"
@@ -11,7 +11,7 @@
             @load="onLoad"
           >
             <div class="video-content">
-              <router-link :to="'/article/' + item.id" :key="item.id" v-for="item in item.list">
+              <router-link :to="'/article/' + item.id" :key="index" v-for="(item, index) in item.list">
                 <div class="video-box">
                   <div style="position: relative;">
                   <img :src="item.img">
@@ -28,6 +28,10 @@
         </div>
       </van-tab>
     </van-tabs>
+    <div class="flexd" :style="{display: showFlexd}">
+      <i class="iconfont Navbar_logo"></i>
+      <span>打开App，看更多精彩视频</span>
+    </div>
   </div>
 </template>
 
@@ -36,7 +40,8 @@ export default {
   data () {
     return {
       category: [],
-      active: 0
+      active: 0,
+      showFlexd: 'none'
     }
   },
   methods: {
@@ -68,10 +73,25 @@ export default {
       }
       this.category[this.active].loading = false
       console.log(res)
+    },
+    handleScroll () {
+      window.addEventListener('scroll', () => {
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+        const windowHeight = document.documentElement.clientHeight || document.body.clientHeight
+        const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight
+        if (scrollTop + windowHeight / 2 >= scrollHeight / 2) {
+          this.showFlexd = 'block'
+        } else {
+          this.showFlexd = 'none'
+        }
+      })
     }
   },
   created () {
     this.getCategory()
+  },
+  mounted () {
+    this.handleScroll()
   }
 }
 </script>
@@ -137,5 +157,23 @@ export default {
 }
 .van-tabs--line /deep/ .van-tabs__wrap{
   height: 10vw;
+}
+.flexd {
+  position: fixed;
+  bottom: 8.333vw;
+  right: 50%;
+  transform: translateX(50%);
+  width: 90%;
+  height: 9.722vw;
+  font-size: 3.75vw;
+  border-radius: 4.861vw;
+  text-align: center;
+  line-height: 9.722vw;
+  color: #fff;
+  background-color: #fb7299;
+  box-shadow: 0 0.53333vw 2.66667vw rgba(0,0,0,.2);
+  span {
+    margin-left: 4.167vw;
+  }
 }
 </style>

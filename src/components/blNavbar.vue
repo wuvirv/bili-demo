@@ -21,8 +21,11 @@ export default {
   },
   methods: {
     linkto () {
-      if (this.$route.path === '/' && localStorage.getItem('token')) this.$router.push('/userinfo')
-      if (this.$route.path === '/' && !localStorage.getItem('token')) this.$router.push('/login')
+      if (this.$route.path === '/' && localStorage.getItem('token')) {
+        this.$router.push('/userinfo')
+      } else if (this.$route.path === '/' && !localStorage.getItem('token')) {
+        this.$router.push('/login')
+      }
     },
     linktot () {
       if (this.$route.path === '/userinfo' && this.$store.state.showEdit === true) this.$store.commit('changeEditShow')

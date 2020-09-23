@@ -10,3 +10,6 @@ html, body, #app {
   /* 元素隐藏 */
   display: none;
 }
+body *, body :after, body :before {
+  box-sizing: border-box;
+}
