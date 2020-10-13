@@ -25,6 +25,8 @@ export default {
         this.$router.push('/userinfo')
       } else if (this.$route.path === '/' && !localStorage.getItem('token')) {
         this.$router.push('/login')
+      } else {
+        this.$router.push('/login')
       }
     },
     linktot () {

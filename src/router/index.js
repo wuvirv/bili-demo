@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Register from '../views/Register'
-import Login from '../views/Login'
-import userInfo from '../views/userInfo'
-import Home from '../views/Home'
-import Article from '../views/Article'
+const Register = () => import(/* webpackChunkName:"Register" */ '../views/Register')
+const Login = () => import(/* webpackChunkName:"Login" */ '../views/Login')
+const userInfo = () => import(/* webpackChunkName:"userInfo" */ '../views/userInfo')
+const Home = () => import(/* webpackChunkName:"Home" */ '../views/Home')
+const Article = () => import(/* webpackChunkName:"Article" */ '../views/Article')
+
 Vue.use(VueRouter)
 
 const routes = [

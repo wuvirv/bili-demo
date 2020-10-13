@@ -26,7 +26,6 @@ export default new Vuex.Store({
       const { data: res } = await http.get('user/' + localStorage.getItem('id'))
       context.commit('setUserInfo', res[0])
       localStorage.setItem('img', res[0].user_img)
-      console.log(res[0])
     }
   },
   getters: {}
